@@ -1,0 +1,24 @@
+#include <iostream>
+#include <cmath>
+#include <vector>
+
+// инициализация матрицы смежности
+std::vector<std::vector<int64_t>> init_adjacency_matrix(int vertex_amount, int edge_amount);
+
+// умножение матриц
+std::vector<std::vector<int64_t>> matrix_multiplication(std::vector<std::vector<int64_t>> A, std::vector<std::vector<int64_t>> B, int size);
+
+// бинарное возведение матрицы в степень
+std::vector<std::vector<int64_t>> matrix_binary_exponentiation(std::vector<std::vector<int64_t>> matrix, int size, int power);
+
+// рассчёт количества путей фиксированной длины из данной вершины
+int64_t fixed_routes_from_vertex(std::vector<std::vector<int64_t>> adjacency_matrix, int vertex_amount, int route_length, int start_vertex);
+
+int main() {
+    std::ios_base::sync_with_stdio(false);
+    int vertex_amount, edge_amount, route_length;
+    std::cin >> vertex_amount >> edge_amount >> route_length;
+    std::vector<std::vector<int64_t>> adjacency_matrix = init_adjacency_matrix(vertex_amount, edge_amount);
+    std::cout << fixed_routes_from_vertex(adjacency_matrix, vertex_amount, route_length, 0);
+    return 0;
+}
