@@ -27,7 +27,7 @@ void write(int answer);
 int main() {
     std::ios_base::sync_with_stdio(false);
     const Graph labyrinth = init_adjacency_matrix();
-    int64_t answer = find_answer(labyrinth);
+    const int64_t answer = find_answer(labyrinth);
     write(answer);
     return 0;
 }
