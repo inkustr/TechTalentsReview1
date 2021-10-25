@@ -19,7 +19,7 @@ std::vector<std::vector<int64_t>> matrix_multiplication(const std::vector<std::v
 std::vector<std::vector<int64_t>> matrix_binary_exponentiation(const std::vector<std::vector<int64_t>>& matrix, int size, int power);
 
 // восстановление и вывод ответа
-void write_fixed_routes_from_vertex(graph answer_graph);
+void write_fixed_routes_from_vertex(const graph& answer_graph);
 
 int main() {
     std::ios_base::sync_with_stdio(false);
