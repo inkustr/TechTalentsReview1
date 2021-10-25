@@ -2,23 +2,30 @@
 #include <cmath>
 #include <vector>
 
+struct graph {
+    int vertex_amount;
+    int edge_amount;
+    int required_power;
+    std::vector<std::vector<int64_t>> adjacency_matrix;
+};
+
 // инициализация матрицы смежности
-std::vector<std::vector<int64_t>> init_adjacency_matrix(int vertex_amount, int edge_amount);
+graph init_adjacency_matrix();
 
 // умножение матриц
-std::vector<std::vector<int64_t>> matrix_multiplication(std::vector<std::vector<int64_t>> A, std::vector<std::vector<int64_t>> B, int size);
+std::vector<std::vector<int64_t>> matrix_multiplication(const std::vector<std::vector<int64_t>>& matrix_first, const std::vector<std::vector<int64_t>>& matrix_second, int size);
 
 // бинарное возведение матрицы в степень
-std::vector<std::vector<int64_t>> matrix_binary_exponentiation(std::vector<std::vector<int64_t>> matrix, int size, int power);
+std::vector<std::vector<int64_t>> matrix_binary_exponentiation(const std::vector<std::vector<int64_t>>& matrix, int size, int power);
 
-// рассчёт количества путей фиксированной длины из данной вершины
-int64_t fixed_routes_from_vertex(std::vector<std::vector<int64_t>> adjacency_matrix, int vertex_amount, int route_length, int start_vertex);
+// восстановление и вывод ответа
+void write_fixed_routes_from_vertex(graph answer_graph);
 
 int main() {
     std::ios_base::sync_with_stdio(false);
-    int vertex_amount, edge_amount, route_length;
-    std::cin >> vertex_amount >> edge_amount >> route_length;
-    std::vector<std::vector<int64_t>> adjacency_matrix = init_adjacency_matrix(vertex_amount, edge_amount);
-    std::cout << fixed_routes_from_vertex(adjacency_matrix, vertex_amount, route_length, 0);
+    const graph labyrinth = init_adjacency_matrix();
+    const graph answer_graph = { labyrinth.vertex_amount, labyrinth.edge_amount, 0, matrix_binary_exponentiation(labyrinth.adjacency_matrix, labyrinth.vertex_amount, labyrinth.required_power) };
+    write_fixed_routes_from_vertex(answer_graph);
     return 0;
 }
+
