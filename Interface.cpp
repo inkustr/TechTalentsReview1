@@ -19,15 +19,16 @@ std::vector<std::vector<int64_t>> matrix_multiplication(const std::vector<std::v
 std::vector<std::vector<int64_t>> matrix_binary_exponentiation(const std::vector<std::vector<int64_t>>& matrix, int power);
 
 // подсчёт матрицы, в которой хранится количество путей нужной длины
-Graph find_answer_graph(const Graph& labyrinth);
+int64_t find_answer(const Graph& labyrinth);
 
-// восстановление и вывод ответа
-void write_fixed_routes_from_vertex(const Graph& answer_graph);
+// вывод ответа
+void write(int answer);
 
 int main() {
     std::ios_base::sync_with_stdio(false);
     const Graph labyrinth = init_adjacency_matrix();
-    const Graph answer_graph = find_answer_graph(labyrinth);
-    write_fixed_routes_from_vertex(answer_graph);
+    int64_t answer = find_answer(labyrinth);
+    write(answer);
     return 0;
 }
+
