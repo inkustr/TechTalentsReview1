@@ -10,7 +10,7 @@ struct Graph {
 };
 
 // инициализация матрицы смежности
-Graph adjacency_matrix_initialization();
+Graph adjacency_matrix_initialization(std::istream& in);
 
 // умножение матриц
 std::vector<std::vector<int64_t>> matrix_multiplication(
@@ -25,13 +25,14 @@ std::vector<std::vector<int64_t>> matrix_exponentiation(
 int64_t calculate_amount_of_fixed_routes(const Graph& labyrinth);
 
 // вывод количества путей фиксированной длины из первой вершины
-void write(int64_t amount_of_fixed_routes);
+void write(const int64_t amount_of_fixed_routes,
+    std::ostream& out);
 
 int main() {
     std::ios_base::sync_with_stdio(false);
-    const Graph labyrinth = adjacency_matrix_initialization();
+    const Graph labyrinth = adjacency_matrix_initialization(std::cin);
     const int64_t amount_of_fixed_routes =
         calculate_amount_of_fixed_routes(labyrinth);
-    write(amount_of_fixed_routes);
+    write(amount_of_fixed_routes, std::cout);
     return 0;
 }
