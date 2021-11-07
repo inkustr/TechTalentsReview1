@@ -2,8 +2,8 @@
 #include <cmath>
 #include <vector>
 
-const int modulus = 1000000007;
-const int indexing_shift = 1;
+const int MODULUS = 1000000007;
+const int INDEXING_SHIFT = 1;
 
 struct Graph {
     int vertex_amount;
@@ -28,8 +28,8 @@ Graph adjacency_matrix_initialization(std::istream& in)
     for (int i = 0; i < labyrinth.edge_amount; ++i) {
         int start, finish;
         in >> start >> finish;
-        start = start - indexing_shift;
-        finish = finish - indexing_shift;
+        start = start - INDEXING_SHIFT;
+        finish = finish - INDEXING_SHIFT;
         labyrinth.adjacency_matrix[start][finish]++;
     }
     return labyrinth;
@@ -51,7 +51,7 @@ std::vector<std::vector<int64_t> > matrix_multiplication(
         for (int j = 0; j < matrix_second[0].size(); ++j) {
             for (int k = 0; k < matrix_first[0].size(); ++k)
                 matrix_result[i][j] = (matrix_result[i][j] + matrix_first[i][k]
-                    * matrix_second[k][j]) % modulus;
+                    * matrix_second[k][j]) % MODULUS;
         }
     }
     return matrix_result;
@@ -82,15 +82,12 @@ std::vector<std::vector<int64_t> > matrix_exponentiation(
 // подсчёт матрицы, в которой хранится количество путей нужной длины
 int64_t calculate_amount_of_fixed_routes(const Graph& labyrinth)
 {
-    Graph answer_graph;
-    answer_graph.vertex_amount = labyrinth.vertex_amount;
-    answer_graph.edge_amount = labyrinth.edge_amount;
-    answer_graph.required_power = 0;
-    answer_graph.adjacency_matrix = matrix_exponentiation(
+    std::vector<std::vector<int64_t> > answer_graph = matrix_exponentiation(
         labyrinth.adjacency_matrix, labyrinth.required_power);
     int64_t sum = 0;
-    for (int i = 0; i < answer_graph.vertex_amount; ++i)
-        sum = (sum + answer_graph.adjacency_matrix[0][i]) % modulus;
+    for (int i = 0; i < answer_graph.size(); ++i) {
+        sum = (sum + answer_graph[0][i]) % MODULUS;
+    }
     return sum;
 }
 
